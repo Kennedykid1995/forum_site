@@ -1,34 +1,36 @@
 
 exports.up = function(knex) {
     //Forum Table
-  knex.schema.createTable('forum', forum => {
-      forum.increament(); 
-      forum.string('title', 50)
+  knex.schema.createTable('forum', tbl => {
+      tbl.increment(); 
+      tbl.string('title', 50)
       .notNullable()
       .unique()
-      forum.text('description', 128)
+      tbl.text('description', 128)
       .notNullable()
   })
-  knex.schema.createTable('post', post => {
-      post.increment(); 
-      forum.integer('forum_id')
+  //post table lives in forum
+  knex.schema.createTable('post', tbl => {
+      tbl.increment(); 
+      tbl.integer('forum_id')
       .unsigned()
       .notNullable()
-      .refrences('id')
+      .refrences('forum.id')
       .inTable('forum')
-      post.string('title', 50)
+      tbl.string('title', 50)
       .notNullable()
-      post.text('content', 300)
+      tbl.text('content', 300)
       .notNullable()
       //will be adding a integer that takes in user id
   })
-  knex.schema.createTable('comment', comment => {
-      comment.increament();
-      forum.integer('post_id')
+  //comment table lives in post
+  knex.schema.createTable('comment', tbl => {
+      tbl.increment();
+      tbl.integer('post_id')
       .unsigned()
-      .refrences('forum_id')
+      .refrences('post.id')
       .inTable('post')
-      comment.string('content', 300)
+      tbl.string('content', 300)
       .notNullable()
     //will be adding a integer that takes in user id
   })
