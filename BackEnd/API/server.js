@@ -14,7 +14,7 @@ server.get('/', (req, res) => {
 //GET: 
 //All Forums
 server.get('/frontpage', (req, res) => {
-    db('forum')
+    db('forums')
     .then(forum => res.status(200).json(forum))
     .catch(err => res.status(500).json(err));
 })
@@ -63,7 +63,7 @@ server.post('/frontpage', (req, res) => {
     }
     console.log(forum)
     db.insert(forum)
-        .into('forum')
+        .into('forums')
         .then(ids => {
             res.status(201).json(ids);
         })
