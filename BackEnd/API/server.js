@@ -28,8 +28,7 @@ server.get('/:id', async (req, res) => {
         const { forum_id } = req.body;
         const forum = await db('forums').where({ id });
         const posts = await db('forum_post').where({ forum_id })
-
-        res.status(200).json({forum, posts});
+        res.status(200).json({ forum, posts });
     } catch (err) {
         res.status(500).json(err);
     }
@@ -37,8 +36,22 @@ server.get('/:id', async (req, res) => {
 })
 // One Post within Forum - All comments on Post
 
+server.get('/post/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { post_id } = req.body;
+        const post = await db('forum_post').where({ id });
+        const comments = await db('post_comments').where({ post_id });
+        res.status(200).json({post, comments});
+    } catch (err) {
+        console.log(err)
+        res.status(500).json(err);
+    }
+})
+
 //POST
-//Forum
+//create a forum
+
 server.post('/frontpage', async (req, res) => {
     try {
         const forum = req.body;
@@ -51,7 +64,6 @@ server.post('/frontpage', async (req, res) => {
         res.status(500).json(err);
     }
 })
-
 //create a post onto a forum
 
 server.post('/:id', async (req, res) => {
@@ -69,7 +81,22 @@ server.post('/:id', async (req, res) => {
         res.status(500).json(err)
     }
 })
-//Post
-//Comment
+//create a comment on a post
+
+server.post('/post/:id', async (req, res) => {
+    try {
+        const comment = req.body;
+        const { comment_content } = req.body;
+        const create = await db.insert(comment).into('post_comments');
+        if (!comment_content) {
+            res.status(400).json({ errorMessage: "YOU NEED CONTENT FOR YOUR COMMENT!" });
+        } else {
+            res.status(200).json(create)
+        }
+    } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    }
+})
 
 module.exports = server; 
