@@ -1,38 +1,25 @@
-import React, {Component} from 'react';
-import './App.css';
-import {getForums} from './actions/actions';
-import {connect} from 'react-redux'; 
+import React, { Component } from 'react';
+import AllForums from './components/allForums';
+import { Route } from 'react-router-dom';
+import Forum from './components/forum'; 
 
-class App extends Component{
-  componentDidMount(){
-    this.props.getForums();
-  }
-
+class App extends Component {
   render() {
     return (
       <div className="App">
-        Forums
-        {this.props.gettingForums ? (
-          <h1>Loading...</h1>
-        ): (
-          this.props.forums.map(forum => {
-            return(
-              <h2 key={forum.id}>{forum.title}</h2>
-            )
-          })
-        )}
+          <Route
+            exact path="/"
+            component={AllForums}
+          />
+          <Route 
+          path ="/:id"
+          component={Forum}
+          />
       </div>
     );
   }
 }
 
-const mapStateToProps = state => {
-  const { siteReducer } = state; 
-  return {
-    forums: siteReducer.forums,
-    error: siteReducer.error,
-    gettingForums: siteReducer.gettingForums
-  }
-}
 
-export default connect (mapStateToProps, {getForums})(App);
+
+export default (App);

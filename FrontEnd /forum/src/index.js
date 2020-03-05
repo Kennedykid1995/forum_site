@@ -7,12 +7,15 @@ import { createStore, applyMiddleware } from 'redux';
 import rootReducer from './reducers';
 import logger from 'redux-logger';
 import thunk from 'redux-thunk';
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 
-const store = createStore(rootReducer, applyMiddleware(thunk, logger)); 
+const store = createStore(rootReducer, applyMiddleware(thunk, logger));
 
 ReactDOM.render(
-<Provider store={store} >
-    <App />
-</Provider>, 
-document.getElementById('root'));
+    <Provider store={store} >
+        <Router>
+            <App />
+        </Router>
+    </Provider>,
+    document.getElementById('root'));
 
