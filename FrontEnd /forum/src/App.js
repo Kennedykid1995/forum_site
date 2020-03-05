@@ -12,7 +12,7 @@ class App extends Component {
             component={AllForums}
           />
           <Route 
-          path ="/:id"
+          path ="/:title/:id"
           component={Forum}
           />
       </div>

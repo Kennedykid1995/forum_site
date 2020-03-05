@@ -22,14 +22,15 @@ server.get('/frontpage', async (req, res) => {
     }
 })
 //One Forum - All Posts in a Forum
-server.get('/:id', async (req, res) => {
+server.get('/forum/:id', async (req, res) => {
     try {
         const { id } = req.params;
         const { forum_id } = req.body;
         const forum = await db('forums').where({ id });
-        const posts = await db('forum_post').where({ forum_id })
+        const posts = await db('forum_post').where({forum_id})
         res.status(200).json({ forum, posts });
     } catch (err) {
+        console.log(err)
         res.status(500).json(err);
     }
 
@@ -66,7 +67,7 @@ server.post('/frontpage', async (req, res) => {
 })
 //create a post onto a forum
 
-server.post('/:id', async (req, res) => {
+server.post('/forum/:id', async (req, res) => {
     try {
         const post = req.body;
         const { post_title, post_content } = req.body;

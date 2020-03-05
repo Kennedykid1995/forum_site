@@ -18,7 +18,7 @@ class AllForums extends Component {
                         this.props.forums.map(forum => {
                             return (
                                 <div key={forum.id}>
-                                <Link to={`/${forum.id}`}>{forum.title}</Link>
+                                <Link to={`/${forum.title}/${forum.id}`}>{forum.title}</Link>
                                 <h3>{forum.description}</h3>
                                 </div>
                             )
