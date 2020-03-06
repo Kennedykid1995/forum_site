@@ -37,7 +37,11 @@ export const getForums = () => {
     }
 }
 
+
 export const getForum = () => {
+    function reloadPage(){
+        window.location.reload(true); 
+    } 
     const forum = axios.get(`${forumURL}`);
     console.log(forum, "forums"); 
     return dispatch => {
@@ -52,17 +56,17 @@ export const getForum = () => {
         })
     }
 }
-export const getPosts = () => {
-    const posts = axios.get(`${forumURL}`);
-    return dispatch => {
-        dispatch({type: GETTINGPOSTS});
-        posts
-        .then(response => {
-            console.log(response.data)
-            dispatch({type: GETPOSTS, payload: response.data})
-        })
-        .catch(err => {
-            dispatch({type: ERROR, payload: err})
-        })
-    }
-}
+// export const getPosts = () => {
+//     const posts = axios.get(`${forumURL}`);
+//     return dispatch => {
+//         dispatch({type: GETTINGPOSTS});
+//         posts
+//         .then(response => {
+//             console.log(response.data)
+//             dispatch({type: GETPOSTS, payload: response.data})
+//         })
+//         .catch(err => {
+//             dispatch({type: ERROR, payload: err})
+//         })
+//     }
+// }

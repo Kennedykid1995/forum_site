@@ -4,8 +4,8 @@ const initialState = {
     forums: [],
     posts: [],
     comments: [],
-    forum: {},
-    post: {},
+    singleForum: [],
+    post: [],
     gettingForums: false,
     gettingPosts: false,
     gettingComments: false,
@@ -35,7 +35,7 @@ export const siteReducer = (state = initialState, action) => {
         case actionTypes.GETTINGFORUM:
             return { ...state, gettingForum: true }
         case actionTypes.GETFORUM:
-            return { ...state, forum: action.payload, gettingForum: false }
+            return { ...state, singleForum: action.payload, gettingForum: false }
 
         case actionTypes.GETTINGPOST:
             return { ...state, gettingPost: true }
