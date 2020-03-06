@@ -27,8 +27,21 @@ server.get('/forum/:id', async (req, res) => {
         const { id } = req.params;
         const { forum_id } = req.body;
         const forum = await db('forums').where({ id });
-        const posts = await db('forum_post').where({forum_id})
-        res.status(200).json({ forum, posts });
+        const posts = await db('forum_post').where({forum_id : id})
+        console.log(posts)
+        console.log({id})
+        res.status(200).json({forum, posts});
+    } catch (err) {
+        console.log(err)
+        res.status(500).json(err);
+    }
+
+})
+server.get('/forum/:id', async (req, res) => {
+    try {
+        const posts = await db('forum_post')
+        console.log(posts); 
+        res.json({posts});
     } catch (err) {
         console.log(err)
         res.status(500).json(err);
@@ -42,7 +55,7 @@ server.get('/post/:id', async (req, res) => {
         const { id } = req.params;
         const { post_id } = req.body;
         const post = await db('forum_post').where({ id });
-        const comments = await db('post_comments').where({ post_id });
+        const comments = await db('post_comments').where({ post_id : id });
         res.status(200).json({post, comments});
     } catch (err) {
         console.log(err)
