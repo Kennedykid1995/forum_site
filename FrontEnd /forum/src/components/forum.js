@@ -8,12 +8,28 @@ class Forum extends Component {
         this.props.getForum()
     }
     render() {
+        const forumData = this.props.singleForum
         return (
             <div>
                 {this.props.gettingForum ? (
                     window.onload()
                 ) : (
-                        console.log(this.props.singleForum)
+                        Object.keys(forumData).map((key) => {
+                            return (
+                                <div key={key}>
+                                    {forumData[key].map((data) => {
+                                        return (
+                                            <div>
+                                                <span key={data.id}>{data.title}</span>
+                                                <span key={data.id + data.forum_id}>
+                                                    <Link to={`/${data.title}/${data.post_title}/${data.id}`}>{data.post_title}</Link> : {data.post_content}                                                      {data.post_content}
+                                                </span>
+                                            </div>
+                                        )
+                                    })}
+                                </div>
+                            )
+                        })
                     )}
             </div>
         )
