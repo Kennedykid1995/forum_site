@@ -22,7 +22,7 @@ class Forum extends Component {
                                             <div>
                                                 <span key={data.id}>{data.title}</span>
                                                 <span key={data.id + data.forum_id}>
-                                                    <Link to={`/${data.title}/${data.post_title}/${data.id}`}>{data.post_title}</Link> : {data.post_content}                                                      {data.post_content}
+                                                    <Link to={`/forum/${data.post_title}/${data.id}`}>{data.post_title}</Link> : {data.post_content}                                                      {data.post_content}
                                                 </span>
                                             </div>
                                         )

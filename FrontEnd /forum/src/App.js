@@ -16,7 +16,7 @@ class App extends Component {
           component={Forum}
           />
           <Route 
-          exact path ="/:title/:title/:id"
+          exact path ="/forum/:title/:id"
           component={Post}
           />
       </div>
