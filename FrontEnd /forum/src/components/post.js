@@ -7,9 +7,30 @@ class Post extends Component {
         this.props.getPost();
     }
     render() {
+        const postData = this.props.post
         return (
             <div>
-                Post / Comments 
+                {this.props.gettingPost ? (
+                    window.onload()
+                ) : (
+                    Object.keys(postData).map((key) => {
+                        return(
+                            <div key={key}>
+                                {postData[key].map((data) => {
+                                    return(
+                                        <div>
+                                            <span key={data.id}>{data.post_title} </span>
+                                            <span>{data.post_content}</span>
+                                            <section>
+                                                <span>{data.comment_content}</span>
+                                            </section>
+                                        </div>
+                                    )
+                                })}
+                                </div>
+                        )
+                    })
+                )}
             </div>
         )
     }
