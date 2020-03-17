@@ -2,6 +2,12 @@ import React, { Component } from 'react'
 import { getForum, getPosts } from '../actions/actions';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components'
+
+const Holder = styled.span`
+    border: 1px solid black;
+    background: red; 
+`
 
 class Forum extends Component {
     componentDidMount() {
@@ -20,7 +26,7 @@ class Forum extends Component {
                                     {forumData[key].map((data) => {
                                         return (
                                             <div>
-                                                <span key={data.id}>{data.title}</span>
+                                                <Holder key={data.id}>{data.title}</Holder>
                                                 <span key={data.id + data.forum_id}>
                                                     <Link to={`/forum/${data.post_title}/${data.id}`}>{data.post_title}</Link> : {data.post_content}                                                      {data.post_content}
                                                 </span>

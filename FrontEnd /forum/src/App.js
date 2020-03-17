@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import AllForums from './components/allForums';
 import { Route } from 'react-router-dom';
 import Forum from './components/forum'; 
-import Post from './components/post'
+import Post from './components/post'; 
 class App extends Component {
   render() {
     return (

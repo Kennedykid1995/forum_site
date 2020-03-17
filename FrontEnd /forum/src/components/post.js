@@ -1,25 +1,6 @@
 import React, { Component } from 'react'
 import {getPost} from '../actions/actions'; 
 import {connect} from 'react-redux'; 
-import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-
-
-const useStyles = makeStyles({
-    root: {
-        minWidth: 275,
-    },
-    title: {
-        fontSize: 14, 
-    },
-    content: {
-        fontSize: 12,
-    }
-})
 
 
 class Post extends Component {
@@ -27,7 +8,6 @@ class Post extends Component {
         this.props.getPost();
     }
     render() {
-        const classes = useStyles(); 
         const postData = this.props.post
         return (
             <div>
@@ -40,7 +20,7 @@ class Post extends Component {
                                 {postData[key].map((data) => {
                                     return(
                                         <div>
-                                            <Typography className={classes.title} key={data.id}>{data.post_title} </Typography>
+                                            <span key={data.id}>{data.post_title} </span>
                                             <span>{data.post_content}</span>
                                             <section>
                                                 <span>{data.comment_content}</span>

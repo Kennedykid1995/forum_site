@@ -16,11 +16,16 @@ const url = window.location.pathname;
 const id = url.substring(url.lastIndexOf("/") + 1);
 console.log(id)
 
+const testURl = "http://localhost:4000/test"; 
 const forumsURL = "http://localhost:4000/frontpage"; //all forums
 const forumURL = `http://localhost:4000/forum/${id}`; //single forum all posts
 const postURL = `http://localhost:4000/post/${id}`; //single post all comments 
 
 
+export const getTest = () => {
+    const test = axios.get(`${testURl}`)
+    console.log(test); 
+}
 //actions
 export const getForums = () => {
     const forums = axios.get(`${forumsURL}`);
@@ -69,3 +74,18 @@ export const getPost = () => {
         })
     }
 }
+
+
+// export const login = (obj: LoginCred) => (dispatch: Dispatch) => {
+//     return dispatch => {
+//         dispatch({ type: LOGIN_START });
+//         axios
+//         .post('https://ramble-round.herokuapp.com/user/login', obj)
+//         .then(res => {
+//             console.log(res.data)
+//           localStorage.setItem('token', res.data.token);
+//           dispatch<LoginAction>({ type: LOGIN_SUCCESS, payload: res.data });
+//         })
+//         .catch(err => console.log(err));
+//     }
+//   };

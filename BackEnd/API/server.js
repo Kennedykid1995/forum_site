@@ -11,6 +11,10 @@ server.get('/', (req, res) => {
     res.send("Hello from Express")
 });
 
+server.get('/test', (req, res) => {
+    res.json({message: "connected"})
+})
+
 //GET: 
 //All Forums
 server.get('/frontpage', async (req, res) => {
