@@ -1,11 +1,40 @@
 import React, { Component } from 'react'
-import { getForums } from '../actions/actions'; 
+import { getForums } from '../actions/actions';
 import { connect } from 'react-redux';
-import {Link} from 'react-router-dom'; 
-import styled from 'styled-components'; 
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
+const TopPage = styled.div`
+    display: flex; 
+    flex-direction: row; 
+    justify-content: space-between; 
+    align-content: center; 
+    padding: 10px; 
+`
 const Holder = styled.div`
-
+    border: 1px solid black;
+    display: flex; 
+    flex-direction: column; 
+    flex-wrap: wrap; 
+`
+const Forum = styled.div`
+    border: 1px solid red; 
+    margin: 10px; 
+    padding: 5px; 
+`
+const ForumLink = styled(Link)`
+    color: black; 
+    text-decoration: none;
+    font-weight: bold; 
+`
+const Input = styled.input`
+    height: 25px; 
+`
+const ProfileImg = styled.div`
+    border-radius: 50px; 
+    background: red; 
+    width: 30px;
+    height: 30px;  
 `
 
 class AllForums extends Component {
@@ -15,20 +44,27 @@ class AllForums extends Component {
 
     render() {
         return (
-            <div>
+            <Holder>
+                <TopPage>
+                    <Input
+                        type="text"
+                        name="search"
+                    />
+                    <ProfileImg />
+                </TopPage>
                 {this.props.gettingForums ? (
                     <h1>Loading...</h1>
                 ) : (
                         this.props.forums.map(forum => {
                             return (
-                                <div key={forum.id}>
-                                <Link to={`/${forum.title}/${forum.id}`}>{forum.title}</Link>
-                                <h3>{forum.description}</h3>
-                                </div>
+                                <Forum key={forum.id}>
+                                    <ForumLink to={`/${forum.title}/${forum.id}`}>{forum.title}</ForumLink>
+                                    <div>{forum.description}</div>
+                                </Forum>
                             )
                         })
                     )}
-            </div>
+            </Holder>
         )
     }
 }
@@ -42,4 +78,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect (mapStateToProps, {getForums}) (AllForums); 
+export default connect(mapStateToProps, { getForums })(AllForums); 

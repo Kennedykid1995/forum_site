@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components'
 
-const Holder = styled.span`
+const Holder = styled.div`
     border: 1px solid black;
-    background: red; 
+    margin: 10px; 
 `
 
 class Forum extends Component {
@@ -26,10 +26,12 @@ class Forum extends Component {
                                     {forumData[key].map((data) => {
                                         return (
                                             <div>
-                                                <Holder key={data.id}>{data.title}</Holder>
+                                                <span key={data.id}>{data.title}</span>
+                                                <Holder>
                                                 <span key={data.id + data.forum_id}>
-                                                    <Link to={`/forum/${data.post_title}/${data.id}`}>{data.post_title}</Link> : {data.post_content}                                                      {data.post_content}
+                                                    <Link to={`/forum/${data.post_title}/${data.id}`}>{data.post_title}</Link>{data.post_content}                                                      {data.post_content}
                                                 </span>
+                                                </Holder>
                                             </div>
                                         )
                                     })}
